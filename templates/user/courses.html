@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدورات</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white; /* لون خلفية */
+            margin: 0;
+            padding: 20px;
+            color: black; /* نص أبيض */
+        }
+        h1 {
+            color: #61dafb; /* لون العنوان */
+            text-align: center; /* محاذاة العنوان للمركز */
+            margin-bottom: 30px; /* مسافة أسفل العنوان */
+        }
+        .course-container {
+            display: flex; /* استخدام Flexbox */
+            flex-wrap: wrap; /* السماح بتغليف العناصر */
+            justify-content: flex-start; /* محاذاة العناصر إلى اليسار */
+            max-width: 1200px; /* أقصى عرض */
+            margin: 0 auto; /* محاذاة القائمة في المركز */
+        }
+        .course-type {
+            width: 100%; /* عرض كامل لنوع الدورة */
+            margin-top: 20px; /* مسافة فوق نوع الدورة */
+            border-bottom: 2px solid #61dafb; /* خط أسفل نوع الدورة */
+            padding-bottom: 10px; /* مسافة أسفل نوع الدورة */
+            font-size: 24px; /* حجم الخط لنوع الدورة */
+            text-align: left; /* محاذاة النص إلى اليسار */
+        }
+        .course {
+            position: relative; /* لتحديد الموقع النسبي للعناصر */
+            background: rgba(58, 63, 71, 0.9); /* خلفية للدورات */
+            margin: 15px; /* مسافة بين العناصر */
+            border-radius: 8px; /* زوايا دائرية */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* ظل */
+            transition: transform 0.3s, box-shadow 0.3s; /* تأثير عند التحويم */
+            text-align: center; /* محاذاة النصوص في الوسط */
+            width: 300px; /* عرض ثابت للمربع */
+            height: 400px; /* ارتفاع ثابت للمربع */
+            overflow: hidden; /* إخفاء أي محتوى يتجاوز الحدود */
+        }
+        .course:hover {
+            transform: scale(1.05); /* تكبير طفيف عند التحويم */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* ظل أكبر عند التحويم */
+        }
+        img {
+            width: 100%; /* تجعل الصورة تتناسب مع عرض العنصر */
+            height: 100%; /* تجعل الصورة تتناسب مع ارتفاع العنصر */
+            object-fit: cover; /* يغطي الصورة المربع بالكامل */
+            border-radius: 8px; /* زوايا دائرية للصورة */
+            position: absolute; /* جعل الصورة في وضع مطلق */
+            top: 0; /* محاذاة الصورة من الأعلى */
+            left: 0; /* محاذاة الصورة من اليسار */
+        }
+        .title {
+            position: absolute; /* جعل العنوان في وضع مطلق */
+            bottom: -20px; /* مسافة من الأسفل */
+            left: 0px; /* مسافة من اليسار */
+            right: 0px; /* مسافة من اليمين */
+            color: #ffffff; /* لون النص */
+            background: linear-gradient(35deg, #6a11cb, #2575fc);
+            padding: 15px; /* حشو داخلي للنص */
+            border-radius: 5px; /* زوايا دائرية للخلفية */
+            transition: transform 0.3s, opacity 0.3s; /* تأثير الحركة عند التغيير */
+        }
+        p {
+            position: absolute; /* جعل الوصف في وضع مطلق */
+            top: -20px; /* موضع الوصف */
+            font-size: 20px; /* حجم الخط */
+            left: 0px; /* مسافة من اليسار */
+            right: 0px; /* مسافة من اليمين */
+            color: #ffffff; /* لون النص */
+            background: linear-gradient(35deg, #6a11cb, #2575fc);
+            padding: 15px; /* حشو داخلي للنص */
+            transition: transform 0.3s, opacity 0.3s; /* تأثير الحركة عند التغيير */
+        }
+        .course:hover .title {
+            transform: translateY(30px); /* تحريك العنوان للأسفل */
+            opacity: 0; /* جعل العنوان غير مرئي */
+        }
+        .course:hover p {
+            transform: translateY(-30px); /* تحريك الوصف للأعلى */
+            opacity: 0; /* جعل الوصف غير مرئي */
+        }
+        .buttons {
+            position: absolute; /* جعل الأزرار في وضع مطلق */
+            top: 50%; /* محاذاة الأزرار في المنتصف عموديًا */
+            left: 50%; /* محاذاة الأزرار في المنتصف أفقيًا */
+            transform: translate(-50%, -50%); /* محاذاة الأزرار تمامًا في المنتصف */
+            opacity: 0; /* جعل الأزرار غير مرئية بشكل افتراضي */
+            transition: opacity 0.3s; /* تأثير الحركة عند التغيير */
+       display: block;
+       
+        }
+        .course:hover .buttons {
+            opacity: 1; /* جعل الأزرار مرئية عند التحويم */
+        }
+        .button {
+            background: transparent; /* خلفية شفافة */
+            border: none; /* إزالة الحدود */
+            font-size: 30px; /* حجم الخط للإيموجي */
+            cursor: pointer; /* تغيير شكل المؤشر عند التحويم */
+            transition: transform 0.3s; /* تأثير عند التحويم */
+        }
+        .button:hover {
+            transform: scale(1.2); /* تكبير الإيموجي عند التحويم */
+        }
+        .cor{
+            width: 120%;
+            font-weight: bold;
+            font-size: 20px;
+     color: rgb(53, 51, 51);
+        }
+    </style>
+</head>
+<body>
+    <h1>الدورات المتاحة</h1>
+    <div class="course-container">
+        {% for course_type, courses in courses_by_type.items() %}
+            <h2 class="course-type">{{ course_type }}</h2>
+            {% for course in courses %}
+                <div class="course">
+                    <img src="{{ course.image_url }}" alt="{{ course.title }}">
+                    <h3 class="title">{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                    <div class="buttons">
+                        <h3 class="cor">{{ course.title }}</h3>
+                        <button class="button" onclick="shareCourse('{{ course.title }}', '{{ course.description }}', '{{ course.image_url }}')">🔗</button> 
+                        <button class="button" onclick="likeCourse('{{ course.id }}', this)">❤️</button>  <!-- زر الإعجاب -->
+                    </div>                 
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    
+    <script>
+    function likeCourse(courseId, button) {
+        fetch(`/like/${courseId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                button.classList.toggle('liked'); // تغيير شكل الزر
+                button.textContent = button.classList.contains('liked') ? '❤️' : '🤍'; // تغيير الإيموجي
+            } else {
+                console.error('Failed to like the course');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    </script>
+</body>
+</html>
