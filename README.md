@@ -1,3 +1,3 @@
 # Learning_platform
 
-version: 2.3
+version: 2.1
